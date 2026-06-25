@@ -1,0 +1,11 @@
+{
+  "name": "expense-tracker-server",
+  "version": "1.0.0",
+  "description": "Express backend for Expense Tracker",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  }
+}
