@@ -21,26 +21,24 @@ if (!MONGODB_URI) {
 }
 
 // Middleware
-const allowedOrigins = [
-  "http://localhost:5173",
-  "http://localhost:3000",
-  "http://127.0.0.1:5173",
-
-  // Production Vercel URL
-  "https://expense-tracker-sooty-omega-55.vercel.app",
-
-  // Vercel preview deployment
-  "https://expense-tracker-17n1tuhxl-pratut04s-projects.vercel.app",
-
-  // Environment variable
-  process.env.FRONTEND_URL,
-].filter(Boolean);
+// Allow localhost, the production Vercel URL, and any Vercel preview URL for this project
+const VERCEL_PREVIEW_REGEX = /^https:\/\/expense-tracker(-[a-z0-9]+)*-pratut04s-projects\.vercel\.app$/;
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (mobile apps, curl, Postman)
+    // Allow requests with no origin (mobile apps, curl, Postman, SSR)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) return callback(null, true);
+
+    const allowed =
+      origin === 'http://localhost:5173' ||
+      origin === 'http://localhost:3000' ||
+      origin === 'http://127.0.0.1:5173' ||
+      origin === 'https://expense-tracker-sooty-omega-55.vercel.app' ||
+      VERCEL_PREVIEW_REGEX.test(origin) ||
+      (process.env.FRONTEND_URL && origin === process.env.FRONTEND_URL);
+
+    if (allowed) return callback(null, true);
+    console.warn(`CORS blocked: ${origin}`);
     callback(new Error(`CORS: origin ${origin} not allowed`));
   },
   credentials: true,
