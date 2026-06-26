@@ -1,6 +1,8 @@
 // API client that connects to the Express/MongoDB backend
-// VITE_API_URL is set in .env — Render URL in prod, localhost in dev
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+// VITE_API_URL is set in .env.production — Render URL in prod, localhost in dev
+const _rawBase = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+// Normalize: ensure the base URL always ends with /api
+const API_BASE = _rawBase.endsWith('/api') ? _rawBase : `${_rawBase}/api`;
 
 const getToken = (): string | null => localStorage.getItem('authToken');
 
