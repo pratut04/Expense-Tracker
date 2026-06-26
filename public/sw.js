@@ -1,9 +1,10 @@
-const CACHE_NAME = 'expense-tracker-v1';
+const CACHE_NAME = 'expense-tracker-v2';
+
 const urlsToCache = [
   '/',
-  '/static/js/bundle.js',
-  '/static/css/main.css',
-  '/manifest.json'
+  '/manifest.json',
+  '/icon-192.png',
+  '/icon-512.png'
 ];
 
 // Install event
@@ -22,7 +23,7 @@ self.addEventListener('fetch', (event) => {
         // Return cached version or fetch from network
         return response || fetch(event.request);
       }
-    )
+      )
   );
 });
 
