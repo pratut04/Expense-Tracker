@@ -22,12 +22,19 @@ if (!MONGODB_URI) {
 
 // Middleware
 const allowedOrigins = [
-  'http://localhost:5173',
-  'http://localhost:3000',
-  'http://127.0.0.1:5173',
-  // Render deployed frontend — set FRONTEND_URL in server/.env on Render
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "http://127.0.0.1:5173",
+
+  // Production Vercel URL
+  "https://expense-tracker-sooty-omega-55.vercel.app",
+
+  // Vercel preview deployment
+  "https://expense-tracker-17n1tuhxl-pratut04s-projects.vercel.app",
+
+  // Environment variable
   process.env.FRONTEND_URL,
-].filter(Boolean); // remove undefined/null entries
+].filter(Boolean);
 
 app.use(cors({
   origin: (origin, callback) => {
