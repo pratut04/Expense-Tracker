@@ -3,6 +3,7 @@ const CACHE_NAME = 'expense-tracker-v2';
 const urlsToCache = [
   '/',
   '/manifest.json',
+  '/favicon.png',
   '/icon-192.png',
   '/icon-512.png'
 ];

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, List, PieChart, Settings, LogOut, Wallet } from 'lucide-react';
+import { Home, List, PieChart, Settings, LogOut } from 'lucide-react';
 import type { AuthUser } from '../../hooks/useAuth';
 
 interface SidebarProps {
@@ -25,9 +25,11 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange, user, onLogou
     <aside className="sidebar">
       {/* Logo */}
       <div className="sidebar-logo">
-        <div className="sidebar-logo-icon">
-          <Wallet size={20} color="white" />
-        </div>
+        <img
+          src="/icon-192.png"
+          alt="ExpenseTrack logo"
+          style={{ width: 40, height: 40, borderRadius: 10, flexShrink: 0, objectFit: 'cover' }}
+        />
         <div className="sidebar-logo-text">
           <h1>ExpenseTrack</h1>
           <p>Smart Money Manager</p>
